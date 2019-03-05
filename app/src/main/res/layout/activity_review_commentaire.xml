@@ -18,49 +18,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/CommentReviewName"
-                android:text="Baptiste Desjobert"
-                android:textSize="25dp"/>
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/CommentReviewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Baptiste Desjobert"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/CommentReviewMovie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/CommentReviewMovie"
                     android:text="Alita : Battle Angel"
-                    android:textStyle="bold"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ratings"/>
+            <RatingBar
+                style="@style/rating_bar_indicator"
+                android:progressTint="@color/gold"/>
 
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"/>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CommentReviewContent"
+            android:justificationMode="inter_word"
             android:text="@string/Lorem_ipsum"/>
 
+
+
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border-commentaire">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Commentaires"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/CommentReviewRecyclerView"
