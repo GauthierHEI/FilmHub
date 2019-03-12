@@ -10,15 +10,18 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="rating_bar_indicator" parent="@android:style/Widget.RatingBar.Indicator" >
+    <style name="rating_bar_indicator" parent="@android:style/Widget.Holo.RatingBar.Small" >
         <item name="android:numStars">5</item>
         <item name="android:rating">4</item>
         <item name="android:stepSize">0.5</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingBottom">22dip</item>
+        <item name="android:paddingBottom">4dip</item>
         <item name="android:layout_marginLeft">4dip</item>
+        <item name="android:isIndicator">true</item>
         <item name="android:layout_marginTop">4dip</item>
+        <item name="android:scaleX">2</item>
+        <item name="android:scaleY">2</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

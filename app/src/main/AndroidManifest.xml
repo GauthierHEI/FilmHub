@@ -20,11 +20,15 @@
             android:label="FilmHub - Editer mon profil"></activity>
         <activity
             android:name=".ProfileActivity"
-            android:label="FilmHub - Mon profil" />
+            android:label="FilmHub - Mon profil"> </activity>
 
         <activity android:name=".AccountCreationActivity"></activity>
 
-        <activity android:name=".CommentReviewActivity"></activity>
+        <activity android:name=".CommentReviewActivity"
+            android:label="FilmHub - Commentaires">
+
+        </activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">

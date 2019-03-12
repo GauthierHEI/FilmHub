@@ -3,29 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CommentReviewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/CommentReviewName"
@@ -42,24 +33,11 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
             <RatingBar
                 style="@style/rating_bar_indicator"
-                android:progressTint="@color/gold"/>
+                android:progressTint="@color/blue"
+                android:progressBackgroundTint="@color/grey"/>
 
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="\n"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -68,14 +46,19 @@
             android:justificationMode="inter_word"
             android:text="@string/Lorem_ipsum"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n"/>
+
 
 
     </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/border-commentaire">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordercommentaire">
 
             <TextView
                 android:layout_width="match_parent"
@@ -89,24 +72,18 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/CommentReviewRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="vertical">
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:layout_marginBottom="50dp">
 
 
         </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_alignParentBottom="true">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <EditText
             android:layout_width="fill_parent"
@@ -122,6 +99,7 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
