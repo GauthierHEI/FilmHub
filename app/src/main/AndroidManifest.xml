@@ -25,9 +25,14 @@
         <activity
             android:name=".listeFilms"
             android:label="FilmHub - Liste de Films" />
+         
         <activity android:name=".AccountCreationActivity"></activity>
 
-        <activity android:name=".CommentReviewActivity"></activity>
+        <activity android:name=".CommentReviewActivity"
+            android:label="FilmHub - Commentaires">
+
+        </activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
