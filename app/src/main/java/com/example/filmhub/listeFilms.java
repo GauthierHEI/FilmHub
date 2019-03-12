@@ -1,65 +1,89 @@
 package com.example.filmhub;
 
-import android.support.annotation.NonNull;
+
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static android.support.constraint.Constraints.TAG;
-
-
-public class listeFilms extends Fragment {
-    @Nullable
-    JSONArray jsonArray = new JSONArray();
-    public TextView list;
-    private List<Films> films;
-
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,  Bundle savedInstance ){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+public class listeFilms extends Fragment implements FilmsAdapter.OnItemClickListener {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference ref=db.collection("Films");
+    private FilmsAdapter adapter;
+    View v;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstance ){
         super.onCreate(savedInstance);
 
-        db.collection("Films")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            JSONArray jsonArray = new JSONArray();
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                                jsonArray.put(document.getData());
-                            }
-                            processData(jsonArray);
-                        } else {
-                            Log.d(TAG, "Error getting documents.", task.getException());
-                        }
+         v = inflater.inflate(R.layout.activity_liste_films,container,false);
 
-                    }
 
-                });
-        return inflater.inflate(R.layout.activity_liste_films,container,false);
+        setUpRecyclerView();
+
+        return v;
+
+    }
+
+   private void setUpRecyclerView(){
+       Query query = ref.orderBy("nomFilm",Query.Direction.DESCENDING);
+       FirestoreRecyclerOptions<Films> options = new FirestoreRecyclerOptions.Builder<Films>()
+               .setQuery(query,Films.class)
+               .build();
+
+       adapter = new FilmsAdapter(options);
+
+       RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+       recyclerView.setHasFixedSize(true);
+       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+       recyclerView.setAdapter(adapter);
+
+       adapter.setOnItemClickListener(new FilmsAdapter.OnItemClickListener() {
+           @Override
+           public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+               Films film = documentSnapshot.toObject(Films.class);
+               String id = documentSnapshot.getId();
+               Toast.makeText(getContext(),"Position : " +position + " ID : "+id,Toast.LENGTH_SHORT).show();
+               Intent i = new Intent(getContext(), FilmActivity.class);
+               Bundle bundle = new Bundle();
+               bundle.putParcelable("film", film);
+               bundle.putString("id", id);
+               i.putExtras(bundle);
+               startActivity(i);
+           }
+       });
+
+   }
+
+   @Override
+   public void onStart(){
+       super.onStart();
+       adapter.startListening();
+   }
+   @Override
+   public void onStop(){
+       super.onStop();
+       adapter.stopListening();
+   }
+
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+    }
+}
 
     }
     void processData (JSONArray obj){
@@ -91,11 +115,9 @@ public class listeFilms extends Fragment {
 
         }
         Log.d(TAG,jsonArray.toString());
-        list = getView().findViewById(R.id.textList);
+        list = getView().findViewById(R.id.reviewsList);
         list.setText(jsonArray.toString());
 
-    }
 
-    }
 
 
